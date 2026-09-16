@@ -8,7 +8,7 @@
 
   <meta
     name="description"
-    content="Portal oficial da Pelada dos Brutos: PDB News, rankings, artilharia, campeões e prestação de contas."
+    content="Portal oficial da Pelada dos Brutos: Pelada ao Vivo, PDB News, rankings, artilharia e prestação de contas."
   >
 
   <link
@@ -32,6 +32,7 @@
       --line:#30313a;
       --green:#78d69a;
       --red:#ff8585;
+      --yellow:#f6c66f;
     }
 
     *{box-sizing:border-box}
@@ -44,7 +45,7 @@
     }
 
     nav{
-      background:rgba(16,17,21,.94);
+      background:rgba(16,17,21,.95);
       border-bottom:1px solid var(--line);
       position:sticky;
       top:0;
@@ -53,7 +54,6 @@
     }
 
     nav ul{align-items:center}
-
     nav a{font-weight:700}
 
     .brand{
@@ -73,7 +73,7 @@
     }
 
     main.container{
-      padding-top:3.5rem;
+      padding-top:3rem;
       padding-bottom:4rem;
     }
 
@@ -82,7 +82,7 @@
       grid-template-columns:1.05fr .95fr;
       gap:2.5rem;
       align-items:center;
-      min-height:62vh;
+      min-height:52vh;
     }
 
     .eyebrow{
@@ -94,7 +94,7 @@
     }
 
     .hero h1{
-      font-size:clamp(2.7rem,7vw,5.6rem);
+      font-size:clamp(2.6rem,7vw,5.4rem);
       line-height:.92;
       margin:.45rem 0 1rem;
     }
@@ -106,36 +106,21 @@
       color:#c8c3cc;
     }
 
-    .hero figure{
-      margin:0;
-      position:relative;
-    }
+    .hero figure{margin:0}
 
     .hero img{
-      height:470px;
       width:100%;
+      height:400px;
       object-fit:cover;
       border-radius:26px;
     }
 
     .hero figcaption{display:none}
 
-    .hero-tag{
-      position:absolute;
-      left:1rem;
-      bottom:1rem;
-      background:#0b0c10e8;
-      border:2px solid var(--purple);
-      border-radius:999px;
-      padding:.55rem .85rem;
-      font-size:.75rem;
-      font-weight:900;
-    }
-
     .section{
       border-top:1px solid var(--line);
-      padding-top:4.5rem;
-      margin-top:4.5rem;
+      padding-top:4rem;
+      margin-top:4rem;
     }
 
     .section-head{
@@ -143,10 +128,16 @@
       justify-content:space-between;
       align-items:end;
       gap:1.5rem;
-      margin-bottom:1.6rem;
+      margin-bottom:1.5rem;
     }
 
     .section-head h2{margin:0}
+
+    .section-head p{
+      margin:0;
+      color:var(--muted-color);
+      max-width:50ch;
+    }
 
     .stats{
       display:grid;
@@ -156,6 +147,7 @@
 
     .stat,
     .card,
+    .panel,
     .admin-card{
       padding:1.2rem;
       border:1px solid var(--line);
@@ -175,6 +167,14 @@
       gap:1rem;
     }
 
+    .rank{
+      display:flex;
+      justify-content:space-between;
+      gap:1rem;
+      padding:.7rem 0;
+      border-bottom:1px solid #2d2e36;
+    }
+
     .pill{
       display:inline-block;
       background:#2a2032;
@@ -185,13 +185,19 @@
       font-weight:900;
     }
 
-    .rank{
-      display:flex;
-      justify-content:space-between;
-      gap:1rem;
-      padding:.72rem 0;
-      border-bottom:1px solid #2d2e36;
+    .table-wrap{
+      overflow:auto;
+      border:1px solid var(--line);
+      border-radius:16px;
     }
+
+    .table-wrap table{
+      margin:0;
+      min-width:680px;
+    }
+
+    .plus{color:#86dda4}
+    .minus{color:#ff9d9d}
 
     .news-card{
       border:1px solid var(--line);
@@ -224,36 +230,6 @@
       font-size:.78rem;
     }
 
-    .table-wrap{
-      overflow:auto;
-      border:1px solid var(--line);
-      border-radius:16px;
-    }
-
-    .table-wrap table{
-      margin:0;
-      min-width:680px;
-    }
-
-    .plus{color:#86dda4}
-    .minus{color:#ff9d9d}
-
-    .admin-shell{
-      display:grid;
-      grid-template-columns:.7fr 1.3fr;
-      gap:1rem;
-    }
-
-    .panel-card{display:none}
-
-    .panel-card.active{display:block}
-
-    .admin-grid{
-      display:grid;
-      grid-template-columns:repeat(2,1fr);
-      gap:1rem;
-    }
-
     .status{
       padding:.8rem 1rem;
       border-radius:10px;
@@ -267,6 +243,28 @@
 
     .status.err{
       border-left:4px solid var(--red);
+    }
+
+    .notice{
+      border-left:4px solid var(--purple);
+      padding:1rem;
+      background:#1b1820;
+      border-radius:10px;
+    }
+
+    .admin-shell{
+      display:grid;
+      grid-template-columns:.7fr 1.3fr;
+      gap:1rem;
+    }
+
+    .admin-panel{display:none}
+    .admin-panel.active{display:block}
+
+    .admin-grid{
+      display:grid;
+      grid-template-columns:repeat(2,1fr);
+      gap:1rem;
     }
 
     .manage-list{
@@ -286,8 +284,6 @@
       background:#131419;
     }
 
-    .manage-row small{color:#aaa6b0}
-
     .manage-row button{
       margin:0;
       padding:.4rem .65rem;
@@ -303,11 +299,86 @@
       border-color:#31323a;
     }
 
-    .notice{
-      border-left:4px solid var(--purple);
+    /* PELADA AO VIVO */
+
+    .live-banner{
+      display:flex;
+      justify-content:space-between;
+      gap:1rem;
+      align-items:center;
+      padding:1rem 1.2rem;
+      border:1px solid #4a3a55;
+      background:linear-gradient(135deg,#251d2c,#17181d);
+      border-radius:16px;
+      margin-bottom:1rem;
+    }
+
+    .live-dot{
+      display:inline-block;
+      width:.7rem;
+      height:.7rem;
+      background:#ff5d73;
+      border-radius:50%;
+      box-shadow:0 0 0 6px rgba(255,93,115,.12);
+      margin-right:.5rem;
+    }
+
+    .live-grid{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:1rem;
+    }
+
+    .team-box{
+      padding:.9rem 0;
+      border-bottom:1px solid #2d2e36;
+    }
+
+    .team-head,
+    .goal-line{
+      display:flex;
+      justify-content:space-between;
+      gap:.7rem;
+      align-items:center;
+    }
+
+    .team-actions,
+    .goal-actions{
+      display:flex;
+      gap:.35rem;
+      align-items:center;
+    }
+
+    .team-actions button,
+    .goal-actions button{
+      margin:0;
+      padding:.32rem .65rem;
+    }
+
+    .team-score,
+    .goal-score{
+      font-weight:900;
+      font-size:1.15rem;
+      color:white;
+    }
+
+    .players{
+      margin:.45rem 0 0;
+      color:#bbb5c1;
+      font-size:.88rem;
+    }
+
+    .finish-box{
+      margin-top:1rem;
       padding:1rem;
-      background:#1b1820;
-      border-radius:10px;
+      border:1px solid #4a3a55;
+      background:#161319;
+      border-radius:14px;
+    }
+
+    .mini{
+      font-size:.84rem;
+      color:#aaa6b0;
     }
 
     section[aria-label="Subscribe example"]{
@@ -326,26 +397,31 @@
     footer{padding:2.2rem 0}
 
     @media(max-width:900px){
-      nav ul:nth-child(2) li:not(:last-child){display:none}
+
+      nav ul:nth-child(2) li:not(:last-child){
+        display:none;
+      }
 
       .hero,
-      .admin-shell{
+      .admin-shell,
+      .live-grid{
         grid-template-columns:1fr;
       }
 
-      .hero img{height:370px}
-
-      .news-grid,
-      .cards,
-      .admin-grid{
-        grid-template-columns:1fr;
-      }
+      .hero img{height:330px}
 
       .stats{
         grid-template-columns:repeat(2,1fr);
       }
 
-      .section-head{
+      .cards,
+      .news-grid,
+      .admin-grid{
+        grid-template-columns:1fr;
+      }
+
+      .section-head,
+      .live-banner{
         align-items:start;
         flex-direction:column;
       }
@@ -363,627 +439,1189 @@
 
 <body>
 
-  <nav class="container-fluid">
-    <ul>
-      <li>
-        <strong class="brand">
-          <span class="crest">⚽</span>
-          PELADA DOS BRUTOS
+<nav class="container-fluid">
+
+  <ul>
+    <li>
+      <strong class="brand">
+        <span class="crest">⚽</span>
+        PELADA DOS BRUTOS
+      </strong>
+    </li>
+  </ul>
+
+  <ul>
+    <li><a href="#ao-vivo">Pelada ao Vivo</a></li>
+    <li><a href="#newsletter">PDB News</a></li>
+    <li><a href="#rankings">Rankings</a></li>
+    <li><a href="#diretoria" role="button">Diretoria</a></li>
+  </ul>
+
+</nav>
+
+
+<main class="container">
+
+<div class="grid">
+
+<section>
+
+<hgroup>
+  <h2 class="eyebrow">
+    Portal oficial • temporada 2026
+  </h2>
+
+  <h3 style="display:none">
+    Pelada dos Brutos
+  </h3>
+</hgroup>
+
+
+<div class="hero">
+
+  <div>
+
+    <span class="eyebrow">
+      Toda quinta tem história
+    </span>
+
+    <h1>
+      Futebol, resenha e
+      <span>Brutalidade.</span>
+    </h1>
+
+    <p>
+      Controle ao vivo da pelada, rankings anuais,
+      artilharia, PDB News e prestação de contas
+      em um único portal.
+    </p>
+
+  </div>
+
+  <figure>
+
+    <img
+      src="https://images.unsplash.com/photo-1579952363873-27f3bade9f55?auto=format&fit=crop&w=1200&q=85"
+      alt="Bola de futebol em campo"
+    >
+
+    <figcaption>
+      <a href="https://unsplash.com" target="_blank">
+        Foto via Unsplash
+      </a>
+    </figcaption>
+
+  </figure>
+
+</div>
+
+
+<!-- ======================================================
+     PELADA AO VIVO
+====================================================== -->
+
+<section class="section" id="ao-vivo">
+
+  <div class="section-head">
+
+    <div>
+      <span class="eyebrow">
+        CONTROLE DA RODADA
+      </span>
+
+      <h2>Pelada ao Vivo</h2>
+    </div>
+
+    <p>
+      Apenas diretores logados podem controlar a rodada.
+      Nada entra no ranking anual até o encerramento.
+    </p>
+
+  </div>
+
+
+  <div id="liveLoginHint" class="notice">
+
+    Faça login na Área da Diretoria para usar
+    o controle da Pelada ao Vivo.
+
+  </div>
+
+
+  <div id="liveArea" style="display:none">
+
+
+    <div class="live-banner">
+
+      <div>
+
+        <span class="live-dot"></span>
+
+        <strong id="liveStatusTitle">
+          Nenhuma pelada aberta
         </strong>
-      </li>
-    </ul>
 
-    <ul>
-      <li><a href="#newsletter">PDB News</a></li>
-      <li><a href="#rankings">Rankings</a></li>
-      <li><a href="#diretoria" role="button">Diretoria</a></li>
-    </ul>
-  </nav>
-
-  <main class="container">
-    <div class="grid">
-      <section>
-
-        <hgroup>
-          <h2 class="eyebrow">Portal oficial • temporada 2026</h2>
-          <h3 style="display:none">Pelada dos Brutos</h3>
-        </hgroup>
-
-        <div class="hero">
-          <div>
-            <span class="eyebrow">Toda quinta tem história</span>
-
-            <h1>
-              Futebol, resenha e
-              <span>Brutalidade.</span>
-            </h1>
-
-            <p>
-              Resultados semanais, classificação anual, artilharia,
-              campeões, fotos e prestação de contas em um único portal.
-            </p>
-          </div>
-
-          <figure>
-            <img
-              src="https://images.unsplash.com/photo-1579952363873-27f3bade9f55?auto=format&fit=crop&w=1200&q=85"
-              alt="Bola de futebol em campo"
-            >
-
-            <span class="hero-tag">
-              ⚽ PELADA DOS BRUTOS
-            </span>
-
-            <figcaption>
-              <a href="https://unsplash.com" target="_blank">
-                Foto via Unsplash
-              </a>
-            </figcaption>
-          </figure>
+        <div
+          class="mini"
+          id="liveStatusMeta"
+        >
+          Abra uma nova pelada para começar.
         </div>
 
-        <section class="section" id="newsletter">
+      </div>
 
-          <div class="section-head">
-            <div>
-              <span class="eyebrow">PDB NEWS</span>
-              <h2>Newsletter dos Brutos</h2>
-            </div>
 
-            <p>
-              Publicações semanais feitas pela diretoria.
-            </p>
-          </div>
+      <div>
 
-          <div class="news-grid" id="newsGrid"></div>
+        <button id="newSessionBtn">
+          Nova pelada
+        </button>
 
-        </section>
+        <button
+          id="refreshLiveBtn"
+          class="secondary"
+        >
+          Atualizar
+        </button>
 
-        <section class="section" id="rankings">
+      </div>
 
-          <div class="section-head">
-            <div>
-              <span class="eyebrow">CLASSIFICAÇÃO</span>
-              <h2>Temporada 2026</h2>
-            </div>
-
-            <p>
-              Atualização automática com base nos lançamentos salvos.
-            </p>
-          </div>
-
-          <div class="stats">
-
-            <div class="stat">
-              <small>Líder em vitórias</small>
-              <strong id="liderVitorias">—</strong>
-              <span id="liderVitoriasNome">sem dados</span>
-            </div>
-
-            <div class="stat">
-              <small>Artilheiro</small>
-              <strong id="liderGols">—</strong>
-              <span id="liderGolsNome">sem dados</span>
-            </div>
-
-            <div class="stat">
-              <small>Saldo atual</small>
-              <strong id="saldoAtual">R$ 0,00</strong>
-              <span>automático</span>
-            </div>
-
-            <div class="stat">
-              <small>Instagram</small>
-              <strong>@</strong>
-              <span>peladadosbrutos</span>
-            </div>
-
-          </div>
-
-          <div class="cards">
-
-            <article class="card">
-              <span class="pill">VITÓRIAS 2026</span>
-              <div id="rankingVitorias"></div>
-            </article>
-
-            <article class="card">
-              <span class="pill">ARTILHARIA 2026</span>
-              <div id="rankingGols"></div>
-            </article>
-
-            <article class="card">
-              <span class="pill">CAMPEÕES ANUAIS</span>
-              <div id="championsList"></div>
-            </article>
-
-          </div>
-
-        </section>
-
-        <section class="section" id="contas">
-
-          <div class="section-head">
-            <div>
-              <span class="eyebrow">TRANSPARÊNCIA</span>
-              <h2>Prestação de contas</h2>
-            </div>
-
-            <p>
-              Entradas, saídas e saldo calculados automaticamente.
-            </p>
-          </div>
-
-          <div class="table-wrap">
-
-            <table>
-              <thead>
-                <tr>
-                  <th>Data</th>
-                  <th>Entrada</th>
-                  <th>Saída</th>
-                  <th>Descrição</th>
-                  <th>Saldo</th>
-                </tr>
-              </thead>
-
-              <tbody id="financeTable"></tbody>
-
-            </table>
-
-          </div>
-
-        </section>
-
-        <section class="section" id="diretoria">
-
-          <div class="section-head">
-            <div>
-              <span class="eyebrow">ACESSO RESTRITO</span>
-              <h2>Área da Diretoria</h2>
-            </div>
-
-            <p>
-              Além de cadastrar, é possível editar e excluir lançamentos.
-            </p>
-          </div>
-
-          <div class="admin-shell">
-
-            <article class="admin-card">
-
-              <h3>Login</h3>
-
-              <form id="loginForm">
-
-                <label>
-                  E-mail
-                  <input type="email" id="loginEmail" required>
-                </label>
-
-                <label>
-                  Senha
-                  <input type="password" id="loginPassword" required>
-                </label>
-
-                <button type="submit">
-                  Entrar
-                </button>
-
-              </form>
-
-              <button
-                class="secondary"
-                id="logoutBtn"
-                style="display:none"
-              >
-                Sair
-              </button>
-
-              <div id="authStatus" class="status">
-                Aguardando login.
-              </div>
-
-            </article>
-
-            <article
-              class="admin-card panel-card"
-              id="adminPanel"
-            >
-
-              <h3>Painel de atualização</h3>
-
-              <div class="admin-grid">
-
-                <article>
-
-                  <h4>Publicar PDB News</h4>
-
-                  <form id="newsForm">
-
-                    <input
-                      type="hidden"
-                      id="newsId"
-                    >
-
-                    <label>
-                      Data
-                      <input
-                        type="date"
-                        id="newsDate"
-                        required
-                      >
-                    </label>
-
-                    <label>
-                      Capitão
-                      <input
-                        type="text"
-                        id="newsCaptain"
-                        required
-                      >
-                    </label>
-
-                    <div class="grid">
-
-                      <label>
-                        Vitórias
-                        <input
-                          type="number"
-                          id="newsWins"
-                          min="0"
-                          value="0"
-                        >
-                      </label>
-
-                      <label>
-                        Empates
-                        <input
-                          type="number"
-                          id="newsDraws"
-                          min="0"
-                          value="0"
-                        >
-                      </label>
-
-                    </div>
-
-                    <label>
-                      Foto
-                      <input
-                        type="file"
-                        id="newsPhoto"
-                        accept="image/*"
-                      >
-                    </label>
-
-                    <label>
-                      Resumo
-                      <textarea id="newsSummary"></textarea>
-                    </label>
-
-                    <button type="submit">
-                      Salvar notícia
-                    </button>
-
-                  </form>
-
-                  <div
-                    id="manageNews"
-                    class="manage-list"
-                  ></div>
-
-                </article>
-
-                <article>
-
-                  <h4>Resultados</h4>
-
-                  <form id="resultForm">
-
-                    <input
-                      type="hidden"
-                      id="resultId"
-                    >
-
-                    <label>
-                      Jogador
-                      <input
-                        type="text"
-                        id="resultPlayer"
-                        required
-                      >
-                    </label>
-
-                    <div class="grid">
-
-                      <label>
-                        Vitórias
-                        <input
-                          type="number"
-                          id="resultWins"
-                          min="0"
-                          value="0"
-                        >
-                      </label>
-
-                      <label>
-                        Empates
-                        <input
-                          type="number"
-                          id="resultDraws"
-                          min="0"
-                          value="0"
-                        >
-                      </label>
-
-                    </div>
-
-                    <button type="submit">
-                      Salvar resultado
-                    </button>
-
-                  </form>
-
-                  <div
-                    id="manageResults"
-                    class="manage-list"
-                  ></div>
-
-                </article>
-
-                <article>
-
-                  <h4>Gols</h4>
-
-                  <form id="goalForm">
-
-                    <input
-                      type="hidden"
-                      id="goalId"
-                    >
-
-                    <label>
-                      Jogador
-                      <input
-                        type="text"
-                        id="goalPlayer"
-                        required
-                      >
-                    </label>
-
-                    <label>
-                      Gols
-                      <input
-                        type="number"
-                        id="goalCount"
-                        min="1"
-                        value="1"
-                      >
-                    </label>
-
-                    <button type="submit">
-                      Salvar gols
-                    </button>
-
-                  </form>
-
-                  <div
-                    id="manageGoals"
-                    class="manage-list"
-                  ></div>
-
-                </article>
-
-                <article>
-
-                  <h4>Finanças</h4>
-
-                  <form id="financeForm">
-
-                    <input
-                      type="hidden"
-                      id="financeId"
-                    >
-
-                    <label>
-                      Data
-                      <input
-                        type="date"
-                        id="financeDate"
-                        required
-                      >
-                    </label>
-
-                    <label>
-                      Descrição
-                      <input
-                        type="text"
-                        id="financeDescription"
-                        required
-                      >
-                    </label>
-
-                    <div class="grid">
-
-                      <label>
-                        Tipo
-                        <select id="financeType">
-                          <option value="entrada">
-                            Entrada
-                          </option>
-                          <option value="saida">
-                            Saída
-                          </option>
-                        </select>
-                      </label>
-
-                      <label>
-                        Valor
-                        <input
-                          type="number"
-                          id="financeValue"
-                          step="0.01"
-                          min="0"
-                          required
-                        >
-                      </label>
-
-                    </div>
-
-                    <button type="submit">
-                      Salvar movimentação
-                    </button>
-
-                  </form>
-
-                  <div
-                    id="manageFinance"
-                    class="manage-list"
-                  ></div>
-
-                </article>
-
-                <article>
-
-                  <h4>Campeões anuais</h4>
-
-                  <form id="championForm">
-
-                    <input
-                      type="hidden"
-                      id="championId"
-                    >
-
-                    <label>
-                      Ano
-                      <input
-                        type="number"
-                        id="championYear"
-                        value="2026"
-                        required
-                      >
-                    </label>
-
-                    <label>
-                      Jogador
-                      <input
-                        type="text"
-                        id="championPlayer"
-                        required
-                      >
-                    </label>
-
-                    <button type="submit">
-                      Salvar campeão
-                    </button>
-
-                  </form>
-
-                  <div
-                    id="manageChampions"
-                    class="manage-list"
-                  ></div>
-
-                </article>
-
-              </div>
-
-            </article>
-
-          </div>
-
-          <p class="notice">
-            <strong>Dica:</strong>
-            ao clicar em Editar, os dados voltam para o formulário.
-            Ao clicar em Excluir, o registro é removido do banco e os
-            rankings/saldos são recalculados.
-          </p>
-
-        </section>
-
-      </section>
     </div>
-  </main>
 
-  <section aria-label="Subscribe example">
-    <div class="container">
-      <article>
 
-        <hgroup>
-          <h2>Receba a PDB News</h2>
-          <h3>
-            Cadastre-se para acompanhar os resultados e novidades.
-          </h3>
-        </hgroup>
+    <div
+      id="sessionCreator"
+      class="panel"
+      style="display:none"
+    >
 
-        <form class="grid">
+      <h3>Abrir nova pelada</h3>
 
-          <input
-            type="text"
-            id="firstname"
-            name="firstname"
-            placeholder="Seu nome"
-            aria-label="Seu nome"
-            required
-          >
+      <form
+        id="sessionForm"
+        class="grid"
+      >
+
+        <input
+          type="date"
+          id="sessionDate"
+          required
+        >
+
+        <button type="submit">
+          Abrir pelada
+        </button>
+
+      </form>
+
+    </div>
+
+
+    <div
+      id="liveControls"
+      style="display:none"
+    >
+
+      <div class="live-grid">
+
+
+        <!-- TIMES -->
+
+        <article class="panel">
+
+          <span class="pill">
+            TIMES / VITÓRIAS
+          </span>
+
+          <div id="liveTeams"></div>
+
+          <hr>
+
+          <h4>Adicionar time</h4>
+
+          <form id="teamForm">
+
+            <label>
+              Nome do time
+
+              <input
+                id="teamName"
+                required
+                placeholder="Ex.: Time Roxo"
+              >
+            </label>
+
+
+            <label>
+              Jogadores
+
+              <textarea
+                id="teamPlayers"
+                required
+                placeholder="Wyll, Bruno, Pinheiro, Serpa, Pipe"
+              ></textarea>
+            </label>
+
+
+            <button type="submit">
+              Adicionar time
+            </button>
+
+          </form>
+
+        </article>
+
+
+        <!-- GOLS -->
+
+        <article class="panel">
+
+          <span class="pill">
+            GOLS DA NOITE
+          </span>
+
+          <div id="liveGoals"></div>
+
+          <hr>
+
+          <h4>
+            Adicionar jogador ao placar
+          </h4>
+
+          <form id="goalPlayerForm">
+
+            <label>
+              Jogador
+
+              <input
+                id="goalPlayerName"
+                required
+                placeholder="Nome do jogador"
+              >
+            </label>
+
+
+            <label>
+              Time
+
+              <select
+                id="goalPlayerTeam"
+                required
+              ></select>
+
+            </label>
+
+
+            <button type="submit">
+              Adicionar jogador
+            </button>
+
+          </form>
+
+        </article>
+
+      </div>
+
+
+      <!-- FECHAMENTO -->
+
+      <div class="finish-box">
+
+        <h3>
+          Encerrar pelada
+        </h3>
+
+        <p>
+          O sistema mostra apenas os líderes.
+          Em caso de empate, escolha manualmente
+          qual time foi campeão e qual jogador foi
+          o artilheiro oficial.
+        </p>
+
+
+        <div class="live-grid">
+
+          <label>
+
+            Time campeão
+
+            <select id="championSelect"></select>
+
+          </label>
+
+
+          <label>
+
+            Artilheiro
+
+            <select id="scorerSelect"></select>
+
+          </label>
+
+        </div>
+
+
+        <button id="finishSessionBtn">
+
+          Encerrar pelada e atualizar rankings
+
+        </button>
+
+
+        <div
+          id="finishMessage"
+          class="mini"
+        ></div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- ======================================================
+     PDB NEWS
+====================================================== -->
+
+<section class="section" id="newsletter">
+
+  <div class="section-head">
+
+    <div>
+      <span class="eyebrow">
+        PDB NEWS
+      </span>
+
+      <h2>
+        Newsletter dos Brutos
+      </h2>
+    </div>
+
+    <p>
+      Publicações semanais feitas pela diretoria.
+    </p>
+
+  </div>
+
+  <div
+    class="news-grid"
+    id="newsGrid"
+  ></div>
+
+</section>
+
+
+<!-- ======================================================
+     RANKINGS
+====================================================== -->
+
+<section class="section" id="rankings">
+
+  <div class="section-head">
+
+    <div>
+
+      <span class="eyebrow">
+        CLASSIFICAÇÃO
+      </span>
+
+      <h2>
+        Temporada 2026
+      </h2>
+
+    </div>
+
+    <p>
+      Atualização automática com base nos
+      lançamentos salvos.
+    </p>
+
+  </div>
+
+
+  <div class="stats">
+
+    <div class="stat">
+
+      <small>
+        Líder em vitórias
+      </small>
+
+      <strong id="liderVitorias">
+        —
+      </strong>
+
+      <span id="liderVitoriasNome">
+        sem dados
+      </span>
+
+    </div>
+
+
+    <div class="stat">
+
+      <small>
+        Artilheiro
+      </small>
+
+      <strong id="liderGols">
+        —
+      </strong>
+
+      <span id="liderGolsNome">
+        sem dados
+      </span>
+
+    </div>
+
+
+    <div class="stat">
+
+      <small>
+        Saldo atual
+      </small>
+
+      <strong id="saldoAtual">
+        R$ 0,00
+      </strong>
+
+      <span>
+        automático
+      </span>
+
+    </div>
+
+
+    <div class="stat">
+
+      <small>
+        Instagram
+      </small>
+
+      <strong>@</strong>
+
+      <span>
+        peladadosbrutos
+      </span>
+
+    </div>
+
+  </div>
+
+
+  <div class="cards">
+
+
+    <article class="card">
+
+      <span class="pill">
+        VITÓRIAS
+      </span>
+
+      <div id="rankingVitorias"></div>
+
+    </article>
+
+
+    <article class="card">
+
+      <span class="pill">
+        ARTILHARIA
+      </span>
+
+      <div id="rankingGols"></div>
+
+    </article>
+
+
+    <article class="card">
+
+      <span class="pill">
+        CAMPEÕES ANUAIS
+      </span>
+
+      <div id="championsList"></div>
+
+    </article>
+
+
+  </div>
+
+</section>
+
+
+<!-- ======================================================
+     FINANCEIRO
+====================================================== -->
+
+<section class="section" id="contas">
+
+  <div class="section-head">
+
+    <div>
+
+      <span class="eyebrow">
+        TRANSPARÊNCIA
+      </span>
+
+      <h2>
+        Prestação de contas
+      </h2>
+
+    </div>
+
+    <p>
+      Entradas, saídas e saldo calculados
+      automaticamente.
+    </p>
+
+  </div>
+
+
+  <div class="table-wrap">
+
+    <table>
+
+      <thead>
+
+        <tr>
+          <th>Data</th>
+          <th>Entrada</th>
+          <th>Saída</th>
+          <th>Descrição</th>
+          <th>Saldo</th>
+        </tr>
+
+      </thead>
+
+      <tbody id="financeTable"></tbody>
+
+    </table>
+
+  </div>
+
+</section>
+
+
+<!-- ======================================================
+     DIRETORIA
+====================================================== -->
+
+<section class="section" id="diretoria">
+
+  <div class="section-head">
+
+    <div>
+
+      <span class="eyebrow">
+        ACESSO RESTRITO
+      </span>
+
+      <h2>
+        Área da Diretoria
+      </h2>
+
+    </div>
+
+    <p>
+      Login e manutenção dos registros oficiais.
+    </p>
+
+  </div>
+
+
+  <div class="admin-shell">
+
+
+    <!-- LOGIN -->
+
+    <article class="admin-card">
+
+      <h3>Login</h3>
+
+      <form id="loginForm">
+
+        <label>
+
+          E-mail
 
           <input
             type="email"
-            id="email"
-            name="email"
-            placeholder="Seu e-mail"
-            aria-label="Seu e-mail"
+            id="loginEmail"
             required
           >
 
-          <button
-            type="submit"
-            onclick="event.preventDefault()"
+        </label>
+
+
+        <label>
+
+          Senha
+
+          <input
+            type="password"
+            id="loginPassword"
+            required
           >
-            Assinar newsletter
-          </button>
 
-        </form>
+        </label>
 
-      </article>
-    </div>
-  </section>
 
-  <footer class="container">
-    <small>
-      <a href="#">
-        Pelada dos Brutos © 2026
-      </a>
-      •
-      <a
-        href="https://instagram.com/peladadosbrutos"
-        target="_blank"
+        <button type="submit">
+          Entrar
+        </button>
+
+      </form>
+
+
+      <button
+        class="secondary"
+        id="logoutBtn"
+        style="display:none"
       >
-        @peladadosbrutos
-      </a>
-    </small>
-  </footer>
+        Sair
+      </button>
 
-  <script>
 
-    const SUPABASE_URL =
-      'https://ahpwrcaxzwnxnsvqughd.supabase.co';
+      <div
+        id="authStatus"
+        class="status"
+      >
+        Aguardando login.
+      </div>
 
-    const SUPABASE_ANON_KEY =
-      'sb_publishable_uUoz8jDBecRLdwBpAUJ-6g_x3cAbT45';
+    </article>
 
-    const sb =
-      window.supabase.createClient(
-        SUPABASE_URL,
-        SUPABASE_ANON_KEY
-      );
 
-    const q = id =>
-      document.getElementById(id);
+    <!-- PAINEL -->
 
-    const money = n =>
-      Number(n || 0).toLocaleString(
+    <article
+      class="admin-card admin-panel"
+      id="adminPanel"
+    >
+
+      <h3>
+        Painel de atualização
+      </h3>
+
+
+      <div class="admin-grid">
+
+
+        <!-- NEWS -->
+
+        <article>
+
+          <h4>
+            Publicar PDB News
+          </h4>
+
+          <form id="newsForm">
+
+            <input
+              type="hidden"
+              id="newsId"
+            >
+
+
+            <label>
+
+              Data
+
+              <input
+                type="date"
+                id="newsDate"
+                required
+              >
+
+            </label>
+
+
+            <label>
+
+              Capitão
+
+              <input
+                type="text"
+                id="newsCaptain"
+                required
+              >
+
+            </label>
+
+
+            <div class="grid">
+
+              <label>
+
+                Vitórias
+
+                <input
+                  type="number"
+                  id="newsWins"
+                  min="0"
+                  value="0"
+                >
+
+              </label>
+
+
+              <label>
+
+                Empates
+
+                <input
+                  type="number"
+                  id="newsDraws"
+                  min="0"
+                  value="0"
+                >
+
+              </label>
+
+            </div>
+
+
+            <label>
+
+              Foto
+
+              <input
+                type="file"
+                id="newsPhoto"
+                accept="image/*"
+              >
+
+            </label>
+
+
+            <label>
+
+              Resumo
+
+              <textarea
+                id="newsSummary"
+              ></textarea>
+
+            </label>
+
+
+            <button type="submit">
+              Salvar notícia
+            </button>
+
+          </form>
+
+
+          <div
+            id="manageNews"
+            class="manage-list"
+          ></div>
+
+        </article>
+
+
+        <!-- RESULTADOS -->
+
+        <article>
+
+          <h4>Resultados</h4>
+
+          <form id="resultForm">
+
+            <input
+              type="hidden"
+              id="resultId"
+            >
+
+            <label>
+
+              Jogador
+
+              <input
+                type="text"
+                id="resultPlayer"
+                required
+              >
+
+            </label>
+
+
+            <div class="grid">
+
+              <label>
+
+                Vitórias
+
+                <input
+                  type="number"
+                  id="resultWins"
+                  min="0"
+                  value="0"
+                >
+
+              </label>
+
+
+              <label>
+
+                Empates
+
+                <input
+                  type="number"
+                  id="resultDraws"
+                  min="0"
+                  value="0"
+                >
+
+              </label>
+
+            </div>
+
+
+            <button type="submit">
+              Salvar resultado
+            </button>
+
+          </form>
+
+
+          <div
+            id="manageResults"
+            class="manage-list"
+          ></div>
+
+        </article>
+
+
+        <!-- GOLS -->
+
+        <article>
+
+          <h4>Gols</h4>
+
+          <form id="goalForm">
+
+            <input
+              type="hidden"
+              id="goalId"
+            >
+
+            <label>
+
+              Jogador
+
+              <input
+                type="text"
+                id="goalPlayer"
+                required
+              >
+
+            </label>
+
+
+            <label>
+
+              Gols
+
+              <input
+                type="number"
+                id="goalCount"
+                min="1"
+                value="1"
+              >
+
+            </label>
+
+
+            <button type="submit">
+              Salvar gols
+            </button>
+
+          </form>
+
+
+          <div
+            id="manageGoals"
+            class="manage-list"
+          ></div>
+
+        </article>
+
+
+        <!-- FINANCEIRO -->
+
+        <article>
+
+          <h4>Finanças</h4>
+
+          <form id="financeForm">
+
+            <input
+              type="hidden"
+              id="financeId"
+            >
+
+
+            <label>
+
+              Data
+
+              <input
+                type="date"
+                id="financeDate"
+                required
+              >
+
+            </label>
+
+
+            <label>
+
+              Descrição
+
+              <input
+                type="text"
+                id="financeDescription"
+                required
+              >
+
+            </label>
+
+
+            <div class="grid">
+
+              <label>
+
+                Tipo
+
+                <select id="financeType">
+
+                  <option value="entrada">
+                    Entrada
+                  </option>
+
+                  <option value="saida">
+                    Saída
+                  </option>
+
+                </select>
+
+              </label>
+
+
+              <label>
+
+                Valor
+
+                <input
+                  type="number"
+                  id="financeValue"
+                  step="0.01"
+                  min="0"
+                  required
+                >
+
+              </label>
+
+            </div>
+
+
+            <button type="submit">
+              Salvar movimentação
+            </button>
+
+          </form>
+
+
+          <div
+            id="manageFinance"
+            class="manage-list"
+          ></div>
+
+        </article>
+
+
+        <!-- CAMPEÕES -->
+
+        <article>
+
+          <h4>
+            Campeões anuais
+          </h4>
+
+          <form id="championForm">
+
+            <input
+              type="hidden"
+              id="championId"
+            >
+
+
+            <label>
+
+              Ano
+
+              <input
+                type="number"
+                id="championYear"
+                value="2026"
+                required
+              >
+
+            </label>
+
+
+            <label>
+
+              Jogador
+
+              <input
+                type="text"
+                id="championPlayer"
+                required
+              >
+
+            </label>
+
+
+            <button type="submit">
+              Salvar campeão
+            </button>
+
+          </form>
+
+
+          <div
+            id="manageChampions"
+            class="manage-list"
+          ></div>
+
+        </article>
+
+
+      </div>
+
+    </article>
+
+  </div>
+
+</section>
+
+</section>
+
+</div>
+
+</main>
+
+
+<section aria-label="Subscribe example">
+
+  <div class="container">
+
+    <article>
+
+      <hgroup>
+
+        <h2>
+          Receba a PDB News
+        </h2>
+
+        <h3>
+          Resultados, campeões e novidades
+          da Pelada dos Brutos.
+        </h3>
+
+      </hgroup>
+
+
+      <form class="grid">
+
+        <input
+          type="text"
+          id="firstname"
+          placeholder="Seu nome"
+          aria-label="Seu nome"
+          required
+        >
+
+        <input
+          type="email"
+          id="email"
+          placeholder="Seu e-mail"
+          aria-label="Seu e-mail"
+          required
+        >
+
+        <button
+          type="submit"
+          onclick="event.preventDefault()"
+        >
+          Assinar newsletter
+        </button>
+
+      </form>
+
+    </article>
+
+  </div>
+
+</section>
+
+
+<footer class="container">
+
+  <small>
+
+    <a href="#">
+      Pelada dos Brutos © 2026
+    </a>
+
+    •
+
+    <a
+      href="https://instagram.com/peladadosbrutos"
+      target="_blank"
+    >
+      @peladadosbrutos
+    </a>
+
+  </small>
+
+</footer>
+
+
+<script>
+
+/* ======================================================
+   SUPABASE
+====================================================== */
+
+const SUPABASE_URL =
+  'https://ahpwrcaxzwnxnsvqughd.supabase.co';
+
+const SUPABASE_ANON_KEY =
+  'sb_publishable_uUoz8jDBecRLdwBpAUJ-6g_x3cAbT45';
+
+const sb =
+  window.supabase.createClient(
+    SUPABASE_URL,
+    SUPABASE_ANON_KEY
+  );
+
+
+const q =
+  id =>
+    document.getElementById(id);
+
+
+const money =
+  n =>
+    Number(n || 0)
+      .toLocaleString(
         'pt-BR',
         {
           style:'currency',
@@ -991,1093 +1629,2102 @@
         }
       );
 
-    const br = s =>
-      s
-        ? new Date(
-            s + 'T12:00:00'
-          ).toLocaleDateString('pt-BR')
-        : '';
 
-    let cache = {
-      results:[],
-      goals:[],
-      finance:[],
-      news:[],
-      champions:[]
-    };
+const br =
+  s =>
+    s
+      ? new Date(
+          s + 'T12:00:00'
+        ).toLocaleDateString('pt-BR')
+      : '';
 
-    function st(message, ok=false){
 
-      q('authStatus').textContent =
-        message;
+let cache = {
+  results:[],
+  goals:[],
+  finance:[],
+  news:[],
+  champions:[]
+};
 
-      q('authStatus').className =
-        'status ' +
-        (ok ? 'ok' : 'err');
 
-    }
+let live = {
+  session:null,
+  teams:[],
+  players:[],
+  goals:[]
+};
 
-    async function refreshAuth(){
 
-      const { data } =
-        await sb.auth.getSession();
+/* ======================================================
+   AUTENTICAÇÃO
+====================================================== */
 
-      const active =
-        !!data.session;
+function setStatus(
+  message,
+  ok=false
+){
 
-      q('adminPanel')
-        .classList
-        .toggle(
-          'active',
-          active
-        );
+  q('authStatus').textContent =
+    message;
 
-      q('logoutBtn')
-        .style
-        .display =
-          active
-            ? 'block'
-            : 'none';
+  q('authStatus').className =
+    'status ' +
+    (ok ? 'ok' : 'err');
 
-      st(
-        active
-          ? 'Diretor autenticado. Painel liberado.'
-          : 'Faça login para editar.',
-        active
+}
+
+
+async function refreshAuth(){
+
+  const {data} =
+    await sb.auth.getSession();
+
+  const active =
+    !!data.session;
+
+
+  q('adminPanel')
+    .classList
+    .toggle(
+      'active',
+      active
+    );
+
+
+  q('logoutBtn')
+    .style
+    .display =
+      active
+        ? 'block'
+        : 'none';
+
+
+  q('liveArea')
+    .style
+    .display =
+      active
+        ? 'block'
+        : 'none';
+
+
+  q('liveLoginHint')
+    .style
+    .display =
+      active
+        ? 'none'
+        : 'block';
+
+
+  setStatus(
+    active
+      ? 'Diretor autenticado. Painel liberado.'
+      : 'Faça login para editar.',
+    active
+  );
+
+
+  if(active){
+    await loadLive();
+  }
+
+}
+
+
+q('loginForm')
+.addEventListener(
+  'submit',
+  async event => {
+
+    event.preventDefault();
+
+    const {error} =
+      await sb.auth.signInWithPassword({
+
+        email:
+          q('loginEmail').value,
+
+        password:
+          q('loginPassword').value
+
+      });
+
+
+    if(error){
+
+      setStatus(
+        error.message
       );
 
+    }else{
+
+      await refreshAuth();
+
     }
 
-    q('loginForm')
-      .addEventListener(
-        'submit',
-        async event => {
+  }
+);
 
-          event.preventDefault();
 
-          const { error } =
-            await sb.auth.signInWithPassword({
-              email:
-                q('loginEmail').value,
-              password:
-                q('loginPassword').value
-            });
+q('logoutBtn').onclick =
+async () => {
 
-          if(error){
+  await sb.auth.signOut();
 
-            st(error.message);
+  await refreshAuth();
 
-          }else{
+};
 
-            await refreshAuth();
 
-          }
+/* ======================================================
+   DADOS PÚBLICOS
+====================================================== */
 
-        }
+async function loadPublic(){
+
+  const [
+    resultsResponse,
+    goalsResponse,
+    financeResponse,
+    newsResponse,
+    championsResponse
+  ] =
+  await Promise.all([
+
+    sb
+      .from('results')
+      .select('*')
+      .order(
+        'created_at',
+        {ascending:false}
+      ),
+
+    sb
+      .from('goals')
+      .select('*')
+      .order(
+        'created_at',
+        {ascending:false}
+      ),
+
+    sb
+      .from('finance')
+      .select('*')
+      .order(
+        'date',
+        {ascending:true}
+      ),
+
+    sb
+      .from('news')
+      .select('*')
+      .order(
+        'date',
+        {ascending:false}
+      ),
+
+    sb
+      .from('champions')
+      .select('*')
+      .order(
+        'year',
+        {ascending:false}
+      )
+
+  ]);
+
+
+  cache = {
+
+    results:
+      resultsResponse.data || [],
+
+    goals:
+      goalsResponse.data || [],
+
+    finance:
+      financeResponse.data || [],
+
+    news:
+      newsResponse.data || [],
+
+    champions:
+      championsResponse.data || []
+
+  };
+
+
+  renderPublic();
+  renderAdmin();
+
+}
+
+
+/* ======================================================
+   RENDER PÚBLICO
+====================================================== */
+
+function renderPublic(){
+
+  /* VITÓRIAS */
+
+  let map = {};
+
+  cache.results.forEach(
+    item => {
+
+      map[item.player] ??= {
+        wins:0,
+        draws:0
+      };
+
+      map[item.player].wins +=
+        item.wins || 0;
+
+      map[item.player].draws +=
+        item.draws || 0;
+
+    }
+  );
+
+
+  let list =
+    Object.entries(map)
+      .sort(
+        (a,b) =>
+          b[1].wins -
+          a[1].wins ||
+          b[1].draws -
+          a[1].draws
       );
 
-    q('logoutBtn').onclick =
-      async () => {
 
-        await sb.auth.signOut();
+  q('rankingVitorias')
+    .innerHTML =
+      list.length
+        ? list.map(
+            ([player,value]) =>
+            `
+            <div class="rank">
 
-        await refreshAuth();
+              <span>
+                <b>${player}</b>
+              </span>
 
-      };
+              <strong>
+                ${value.wins}V •
+                ${value.draws}E
+              </strong>
 
-    async function load(){
+            </div>
+            `
+          ).join('')
+        : '<p>Sem dados.</p>';
 
-      const [
-        resultsResponse,
-        goalsResponse,
-        financeResponse,
-        newsResponse,
-        championsResponse
-      ] =
-      await Promise.all([
 
-        sb
-          .from('results')
-          .select('*')
-          .order(
-            'created_at',
-            { ascending:false }
-          ),
+  if(list[0]){
 
-        sb
-          .from('goals')
-          .select('*')
-          .order(
-            'created_at',
-            { ascending:false }
-          ),
+    q('liderVitorias')
+      .textContent =
+        list[0][1].wins +
+        'V';
 
-        sb
-          .from('finance')
-          .select('*')
-          .order(
-            'date',
-            { ascending:true }
-          ),
+    q('liderVitoriasNome')
+      .textContent =
+        list[0][0];
 
-        sb
-          .from('news')
-          .select('*')
-          .order(
-            'date',
-            { ascending:false }
-          ),
+  }
 
-        sb
-          .from('champions')
-          .select('*')
-          .order(
-            'year',
-            { ascending:false }
-          )
 
-      ]);
+  /* ARTILHARIA */
 
-      cache = {
+  map = {};
 
-        results:
-          resultsResponse.data || [],
+  cache.goals.forEach(
+    item => {
 
-        goals:
-          goalsResponse.data || [],
-
-        finance:
-          financeResponse.data || [],
-
-        news:
-          newsResponse.data || [],
-
-        champions:
-          championsResponse.data || []
-
-      };
-
-      renderPublic();
-      renderAdmin();
+      map[item.player] =
+        (map[item.player] || 0) +
+        (item.goals || 0);
 
     }
+  );
 
-    function renderPublic(){
 
-      let map = {};
+  list =
+    Object.entries(map)
+      .sort(
+        (a,b) =>
+          b[1] - a[1]
+      );
 
-      cache.results
-        .forEach(item => {
 
-          map[item.player] ??= {
-            wins:0,
-            draws:0
-          };
+  q('rankingGols')
+    .innerHTML =
+      list.length
+        ? list.map(
+            ([player,value]) =>
+            `
+            <div class="rank">
 
-          map[item.player].wins +=
-            item.wins || 0;
+              <span>
+                ⚽ <b>${player}</b>
+              </span>
 
-          map[item.player].draws +=
-            item.draws || 0;
+              <strong>
+                ${value}
+              </strong>
 
-        });
+            </div>
+            `
+          ).join('')
+        : '<p>Sem dados.</p>';
 
-      let list =
-        Object
-          .entries(map)
-          .sort(
-            (a,b) =>
-              b[1].wins -
-              a[1].wins ||
-              b[1].draws -
-              a[1].draws
-          );
 
-      q('rankingVitorias')
-        .innerHTML =
-          list.length
-            ? list
-                .map(
-                  ([player,value]) =>
-                  `
-                  <div class="rank">
-                    <span>
-                      <b>${player}</b>
-                    </span>
+  if(list[0]){
 
-                    <strong>
-                      ${value.wins}V •
-                      ${value.draws}E
-                    </strong>
-                  </div>
-                  `
-                )
-                .join('')
-            : '<p>Sem dados.</p>';
+    q('liderGols')
+      .textContent =
+        list[0][1] +
+        ' gols';
 
-      if(list[0]){
+    q('liderGolsNome')
+      .textContent =
+        list[0][0];
 
-        q('liderVitorias')
-          .textContent =
-            list[0][1].wins +
-            'V';
+  }
 
-        q('liderVitoriasNome')
-          .textContent =
-            list[0][0];
 
-      }
+  /* FINANCEIRO */
 
-      map = {};
+  let saldo = 0;
 
-      cache.goals
-        .forEach(
-          item => {
 
-            map[item.player] =
-              (map[item.player] || 0) +
-              (item.goals || 0);
+  q('financeTable')
+    .innerHTML =
+      cache.finance.length
+        ? cache.finance.map(
+            item => {
 
-          }
-        );
+              saldo +=
+                item.type === 'entrada'
+                  ? +item.value
+                  : -item.value;
 
-      list =
-        Object
-          .entries(map)
-          .sort(
-            (a,b) =>
-              b[1] -
-              a[1]
-          );
-
-      q('rankingGols')
-        .innerHTML =
-          list.length
-            ? list
-                .map(
-                  ([player,value]) =>
-                  `
-                  <div class="rank">
-                    <span>
-                      ⚽ <b>${player}</b>
-                    </span>
-
-                    <strong>
-                      ${value}
-                    </strong>
-                  </div>
-                  `
-                )
-                .join('')
-            : '<p>Sem dados.</p>';
-
-      if(list[0]){
-
-        q('liderGols')
-          .textContent =
-            list[0][1] +
-            ' gols';
-
-        q('liderGolsNome')
-          .textContent =
-            list[0][0];
-
-      }
-
-      let saldo = 0;
-
-      q('financeTable')
-        .innerHTML =
-          cache.finance.length
-            ? cache.finance
-                .map(
-                  item => {
-
-                    saldo +=
-                      item.type === 'entrada'
-                        ? +item.value
-                        : -item.value;
-
-                    return `
-                    <tr>
-
-                      <td>
-                        ${br(item.date)}
-                      </td>
-
-                      <td class="plus">
-                        ${
-                          item.type === 'entrada'
-                            ? money(item.value)
-                            : '—'
-                        }
-                      </td>
-
-                      <td class="minus">
-                        ${
-                          item.type === 'saida'
-                            ? money(item.value)
-                            : '—'
-                        }
-                      </td>
-
-                      <td>
-                        ${item.description}
-                      </td>
-
-                      <td>
-                        ${money(saldo)}
-                      </td>
-
-                    </tr>
-                    `;
-
-                  }
-                )
-                .join('')
-            : `
+              return `
               <tr>
-                <td colspan="5">
-                  Sem movimentações.
+
+                <td>
+                  ${br(item.date)}
                 </td>
-              </tr>
-            `;
 
-      q('saldoAtual')
-        .textContent =
-          money(saldo);
+                <td class="plus">
 
-      q('championsList')
-        .innerHTML =
-          cache.champions.length
-            ? cache.champions
-                .map(
-                  item =>
-                  `
-                  <div class="rank">
+                  ${
+                    item.type === 'entrada'
+                      ? money(item.value)
+                      : '—'
+                  }
 
-                    <span>
-                      <b>${item.year}</b>
-                    </span>
+                </td>
 
-                    <strong>
-                      ${item.player}
-                    </strong>
+                <td class="minus">
 
-                  </div>
-                  `
-                )
-                .join('')
-            : '<p>Sem campeões.</p>';
+                  ${
+                    item.type === 'saida'
+                      ? money(item.value)
+                      : '—'
+                  }
 
-      q('newsGrid')
-        .innerHTML =
-          cache.news.length
-            ? cache.news
-                .map(
-                  item =>
-                  `
-                  <article class="news-card">
+                </td>
 
-                    ${
-                      item.photo_url
-                        ? `
-                          <img
-                            src="${item.photo_url}"
-                            alt="Campeões da semana"
-                          >
-                        `
-                        : ''
-                    }
-
-                    <div class="news-copy">
-
-                      <span class="meta">
-                        ${br(item.date)}
-                      </span>
-
-                      <h3>
-                        ${
-                          item.captain ||
-                          'Campeões'
-                        }
-                      </h3>
-
-                      <p>
-                        ${
-                          item.summary ||
-                          ''
-                        }
-                      </p>
-
-                      <span class="score">
-                        ${
-                          item.wins || 0
-                        }V
-                        •
-                        ${
-                          item.draws || 0
-                        }E
-                      </span>
-
-                    </div>
-
-                  </article>
-                  `
-                )
-                .join('')
-            : `
-              <article class="news-card">
-                <div class="news-copy">
-                  <h3>
-                    Sem notícias ainda
-                  </h3>
-                </div>
-              </article>
-            `;
-
-    }
-
-    function row(
-      text,
-      edit,
-      del
-    ){
-
-      return `
-      <div class="manage-row">
-
-        <div>
-          ${text}
-        </div>
-
-        <button
-          class="secondary-action"
-          onclick="${edit}"
-        >
-          Editar
-        </button>
-
-        <button
-          class="danger"
-          onclick="${del}"
-        >
-          Excluir
-        </button>
-
-      </div>
-      `;
-
-    }
-
-    function renderAdmin(){
-
-      q('manageResults')
-        .innerHTML =
-          cache.results
-            .map(
-              item =>
-              row(
-                `
-                <b>${item.player}</b>
-                <br>
-                <small>
-                  ${item.wins}V •
-                  ${item.draws}E
-                </small>
-                `,
-                `editResult(${item.id})`,
-                `delRow('results',${item.id})`
-              )
-            )
-            .join('');
-
-      q('manageGoals')
-        .innerHTML =
-          cache.goals
-            .map(
-              item =>
-              row(
-                `
-                <b>${item.player}</b>
-                <br>
-                <small>
-                  ${item.goals} gols
-                </small>
-                `,
-                `editGoal(${item.id})`,
-                `delRow('goals',${item.id})`
-              )
-            )
-            .join('');
-
-      q('manageFinance')
-        .innerHTML =
-          [...cache.finance]
-            .reverse()
-            .map(
-              item =>
-              row(
-                `
-                <b>
+                <td>
                   ${item.description}
-                </b>
-                <br>
-                <small>
-                  ${br(item.date)}
-                  •
-                  ${item.type}
-                  •
-                  ${money(item.value)}
-                </small>
-                `,
-                `editFinance(${item.id})`,
-                `delRow('finance',${item.id})`
-              )
-            )
-            .join('');
+                </td>
 
-      q('manageChampions')
-        .innerHTML =
-          cache.champions
-            .map(
-              item =>
-              row(
-                `
+                <td>
+                  ${money(saldo)}
+                </td>
+
+              </tr>
+              `;
+
+            }
+          ).join('')
+        : `
+          <tr>
+            <td colspan="5">
+              Sem movimentações.
+            </td>
+          </tr>
+        `;
+
+
+  q('saldoAtual')
+    .textContent =
+      money(saldo);
+
+
+  /* CAMPEÕES */
+
+  q('championsList')
+    .innerHTML =
+      cache.champions.length
+        ? cache.champions.map(
+            item =>
+            `
+            <div class="rank">
+
+              <span>
                 <b>${item.year}</b>
-                <br>
-                <small>
-                  ${item.player}
-                </small>
-                `,
-                `editChampion(${item.id})`,
-                `delRow('champions',${item.id})`
-              )
-            )
-            .join('');
+              </span>
 
-      q('manageNews')
-        .innerHTML =
-          cache.news
-            .map(
-              item =>
-              row(
-                `
-                <b>
+              <strong>
+                ${item.player}
+              </strong>
+
+            </div>
+            `
+          ).join('')
+        : '<p>Sem campeões.</p>';
+
+
+  /* NEWS */
+
+  q('newsGrid')
+    .innerHTML =
+      cache.news.length
+        ? cache.news.map(
+            item =>
+            `
+            <article class="news-card">
+
+              ${
+                item.photo_url
+                  ? `
+                    <img
+                      src="${item.photo_url}"
+                      alt="Campeões da semana"
+                    >
+                  `
+                  : ''
+              }
+
+              <div class="news-copy">
+
+                <span class="meta">
                   ${br(item.date)}
-                  •
+                </span>
+
+                <h3>
                   ${
                     item.captain ||
-                    'Sem capitão'
+                    'Campeões'
                   }
-                </b>
-                <br>
-                <small>
+                </h3>
+
+                <p>
+                  ${
+                    item.summary ||
+                    ''
+                  }
+                </p>
+
+                <span class="score">
+
                   ${item.wins || 0}V
                   •
                   ${item.draws || 0}E
-                </small>
-                `,
-                `editNews(${item.id})`,
-                `delNews(${item.id})`
-              )
+
+                </span>
+
+              </div>
+
+            </article>
+            `
+          ).join('')
+        : `
+          <article class="news-card">
+
+            <div class="news-copy">
+
+              <h3>
+                Sem notícias ainda
+              </h3>
+
+            </div>
+
+          </article>
+        `;
+
+}
+
+
+/* ======================================================
+   DIRETORIA - LISTAS
+====================================================== */
+
+function adminRow(
+  text,
+  edit,
+  del
+){
+
+  return `
+  <div class="manage-row">
+
+    <div>
+      ${text}
+    </div>
+
+    <button
+      class="secondary-action"
+      onclick="${edit}"
+    >
+      Editar
+    </button>
+
+    <button
+      class="danger"
+      onclick="${del}"
+    >
+      Excluir
+    </button>
+
+  </div>
+  `;
+
+}
+
+
+function renderAdmin(){
+
+  q('manageResults')
+    .innerHTML =
+      cache.results.map(
+        item =>
+          adminRow(
+            `
+            <b>${item.player}</b>
+            <br>
+            <small>
+              ${item.wins}V •
+              ${item.draws}E
+            </small>
+            `,
+            `editResult(${item.id})`,
+            `deleteRow('results',${item.id})`
+          )
+      ).join('');
+
+
+  q('manageGoals')
+    .innerHTML =
+      cache.goals.map(
+        item =>
+          adminRow(
+            `
+            <b>${item.player}</b>
+            <br>
+            <small>
+              ${item.goals} gols
+            </small>
+            `,
+            `editGoal(${item.id})`,
+            `deleteRow('goals',${item.id})`
+          )
+      ).join('');
+
+
+  q('manageFinance')
+    .innerHTML =
+      [...cache.finance]
+        .reverse()
+        .map(
+          item =>
+            adminRow(
+              `
+              <b>
+                ${item.description}
+              </b>
+              <br>
+              <small>
+                ${br(item.date)}
+                •
+                ${item.type}
+                •
+                ${money(item.value)}
+              </small>
+              `,
+              `editFinance(${item.id})`,
+              `deleteRow('finance',${item.id})`
             )
-            .join('');
+        ).join('');
 
-    }
 
-    window.editResult =
-      id => {
+  q('manageChampions')
+    .innerHTML =
+      cache.champions.map(
+        item =>
+          adminRow(
+            `
+            <b>${item.year}</b>
+            <br>
+            <small>
+              ${item.player}
+            </small>
+            `,
+            `editChampion(${item.id})`,
+            `deleteRow('champions',${item.id})`
+          )
+      ).join('');
 
-        const item =
-          cache.results
-            .find(
-              value =>
-                value.id === id
-            );
 
-        q('resultId').value =
-          id;
+  q('manageNews')
+    .innerHTML =
+      cache.news.map(
+        item =>
+          adminRow(
+            `
+            <b>
+              ${br(item.date)}
+              •
+              ${item.captain || 'Sem capitão'}
+            </b>
+            <br>
+            <small>
+              ${item.wins || 0}V
+              •
+              ${item.draws || 0}E
+            </small>
+            `,
+            `editNews(${item.id})`,
+            `deleteNews(${item.id})`
+          )
+      ).join('');
 
-        q('resultPlayer').value =
-          item.player;
+}
 
-        q('resultWins').value =
-          item.wins;
 
-        q('resultDraws').value =
-          item.draws;
+/* ======================================================
+   EDITAR
+====================================================== */
 
-        location.hash =
-          'diretoria';
+window.editResult =
+id => {
 
-      };
+  const item =
+    cache.results.find(
+      x => x.id === id
+    );
 
-    window.editGoal =
-      id => {
+  q('resultId').value =
+    id;
 
-        const item =
-          cache.goals
-            .find(
-              value =>
-                value.id === id
-            );
+  q('resultPlayer').value =
+    item.player;
 
-        q('goalId').value =
-          id;
+  q('resultWins').value =
+    item.wins;
 
-        q('goalPlayer').value =
-          item.player;
+  q('resultDraws').value =
+    item.draws;
 
-        q('goalCount').value =
-          item.goals;
+};
 
-      };
 
-    window.editFinance =
-      id => {
+window.editGoal =
+id => {
 
-        const item =
-          cache.finance
-            .find(
-              value =>
-                value.id === id
-            );
+  const item =
+    cache.goals.find(
+      x => x.id === id
+    );
 
-        q('financeId').value =
-          id;
+  q('goalId').value =
+    id;
 
-        q('financeDate').value =
-          item.date;
+  q('goalPlayer').value =
+    item.player;
 
-        q('financeDescription').value =
-          item.description;
+  q('goalCount').value =
+    item.goals;
 
-        q('financeType').value =
-          item.type;
+};
 
-        q('financeValue').value =
-          item.value;
 
-      };
+window.editFinance =
+id => {
 
-    window.editChampion =
-      id => {
+  const item =
+    cache.finance.find(
+      x => x.id === id
+    );
 
-        const item =
-          cache.champions
-            .find(
-              value =>
-                value.id === id
-            );
+  q('financeId').value =
+    id;
 
-        q('championId').value =
-          id;
+  q('financeDate').value =
+    item.date;
 
-        q('championYear').value =
-          item.year;
+  q('financeDescription').value =
+    item.description;
 
-        q('championPlayer').value =
-          item.player;
+  q('financeType').value =
+    item.type;
 
-      };
+  q('financeValue').value =
+    item.value;
 
-    window.editNews =
-      id => {
+};
 
-        const item =
-          cache.news
-            .find(
-              value =>
-                value.id === id
-            );
 
-        q('newsId').value =
-          id;
+window.editChampion =
+id => {
 
-        q('newsDate').value =
-          item.date;
+  const item =
+    cache.champions.find(
+      x => x.id === id
+    );
 
-        q('newsCaptain').value =
-          item.captain || '';
+  q('championId').value =
+    id;
 
-        q('newsWins').value =
-          item.wins || 0;
+  q('championYear').value =
+    item.year;
 
-        q('newsDraws').value =
-          item.draws || 0;
+  q('championPlayer').value =
+    item.player;
 
-        q('newsSummary').value =
-          item.summary || '';
+};
 
-      };
 
-    window.delRow =
-      async (
-        table,
+window.editNews =
+id => {
+
+  const item =
+    cache.news.find(
+      x => x.id === id
+    );
+
+  q('newsId').value =
+    id;
+
+  q('newsDate').value =
+    item.date;
+
+  q('newsCaptain').value =
+    item.captain || '';
+
+  q('newsWins').value =
+    item.wins || 0;
+
+  q('newsDraws').value =
+    item.draws || 0;
+
+  q('newsSummary').value =
+    item.summary || '';
+
+};
+
+
+/* ======================================================
+   EXCLUIR
+====================================================== */
+
+window.deleteRow =
+async (
+  table,
+  id
+) => {
+
+  if(
+    !confirm(
+      'Excluir este registro?'
+    )
+  ){
+    return;
+  }
+
+
+  const {error} =
+    await sb
+      .from(table)
+      .delete()
+      .eq(
+        'id',
         id
-      ) => {
+      );
 
-        if(
-          !confirm(
-            'Excluir este registro?'
-          )
-        ){
-          return;
-        }
 
-        const { error } =
-          await sb
-            .from(table)
-            .delete()
-            .eq('id',id);
+  if(error){
 
-        alert(
-          error
-            ? error.message
-            : 'Registro excluído.'
-        );
+    alert(
+      error.message
+    );
 
-        if(!error){
-          await load();
-        }
+    return;
 
-      };
+  }
 
-    window.delNews =
-      async id => {
 
-        if(
-          !confirm(
-            'Excluir esta notícia?'
-          )
-        ){
-          return;
-        }
+  await loadPublic();
 
-        const item =
-          cache.news
-            .find(
-              value =>
-                value.id === id
-            );
+};
 
-        if(item?.photo_url){
 
-          try{
+window.deleteNews =
+async id => {
 
-            const path =
-              item.photo_url
-                .split(
-                  '/news-photos/'
-                )[1];
+  if(
+    !confirm(
+      'Excluir esta notícia?'
+    )
+  ){
+    return;
+  }
 
-            if(path){
 
-              await sb
-                .storage
-                .from('news-photos')
-                .remove([
-                  decodeURIComponent(path)
-                ]);
+  const item =
+    cache.news.find(
+      x => x.id === id
+    );
 
-            }
 
-          }catch(error){}
+  if(item?.photo_url){
 
-        }
+    try{
 
-        const { error } =
-          await sb
-            .from('news')
-            .delete()
-            .eq('id',id);
+      const path =
+        item.photo_url
+          .split(
+            '/news-photos/'
+          )[1];
 
-        alert(
-          error
-            ? error.message
-            : 'Notícia excluída.'
-        );
 
-        if(!error){
-          await load();
-        }
+      if(path){
 
-      };
-
-    async function save(
-      table,
-      id,
-      data
-    ){
-
-      let response;
-
-      if(id){
-
-        response =
-          await sb
-            .from(table)
-            .update(data)
-            .eq('id',id);
-
-      }else{
-
-        response =
-          await sb
-            .from(table)
-            .insert(data);
+        await sb
+          .storage
+          .from('news-photos')
+          .remove([
+            decodeURIComponent(path)
+          ]);
 
       }
 
-      if(response.error){
+    }catch(error){}
 
-        alert(
-          response.error.message
+  }
+
+
+  const {error} =
+    await sb
+      .from('news')
+      .delete()
+      .eq(
+        'id',
+        id
+      );
+
+
+  if(error){
+
+    alert(
+      error.message
+    );
+
+    return;
+
+  }
+
+
+  await loadPublic();
+
+};
+
+
+/* ======================================================
+   SAVE GENÉRICO
+====================================================== */
+
+async function save(
+  table,
+  id,
+  data
+){
+
+  let response;
+
+
+  if(id){
+
+    response =
+      await sb
+        .from(table)
+        .update(data)
+        .eq(
+          'id',
+          id
         );
 
-        return false;
+  }else{
+
+    response =
+      await sb
+        .from(table)
+        .insert(data);
+
+  }
+
+
+  if(response.error){
+
+    alert(
+      response.error.message
+    );
+
+    return false;
+
+  }
+
+
+  await loadPublic();
+
+  return true;
+
+}
+
+
+/* ======================================================
+   RESULTADOS
+====================================================== */
+
+q('resultForm').onsubmit =
+async event => {
+
+  event.preventDefault();
+
+
+  const saved =
+    await save(
+      'results',
+      q('resultId').value,
+      {
+
+        player:
+          q('resultPlayer').value,
+
+        wins:
+          +q('resultWins').value,
+
+        draws:
+          +q('resultDraws').value
 
       }
+    );
 
-      await load();
 
-      return true;
+  if(saved){
+
+    event.target.reset();
+
+    q('resultId').value =
+      '';
+
+  }
+
+};
+
+
+/* ======================================================
+   GOLS
+====================================================== */
+
+q('goalForm').onsubmit =
+async event => {
+
+  event.preventDefault();
+
+
+  const saved =
+    await save(
+      'goals',
+      q('goalId').value,
+      {
+
+        player:
+          q('goalPlayer').value,
+
+        goals:
+          +q('goalCount').value
+
+      }
+    );
+
+
+  if(saved){
+
+    event.target.reset();
+
+    q('goalId').value =
+      '';
+
+  }
+
+};
+
+
+/* ======================================================
+   FINANCEIRO
+====================================================== */
+
+q('financeForm').onsubmit =
+async event => {
+
+  event.preventDefault();
+
+
+  const saved =
+    await save(
+      'finance',
+      q('financeId').value,
+      {
+
+        date:
+          q('financeDate').value,
+
+        description:
+          q('financeDescription').value,
+
+        type:
+          q('financeType').value,
+
+        value:
+          +q('financeValue').value
+
+      }
+    );
+
+
+  if(saved){
+
+    event.target.reset();
+
+    q('financeId').value =
+      '';
+
+  }
+
+};
+
+
+/* ======================================================
+   CAMPEÕES
+====================================================== */
+
+q('championForm').onsubmit =
+async event => {
+
+  event.preventDefault();
+
+
+  const saved =
+    await save(
+      'champions',
+      q('championId').value,
+      {
+
+        year:
+          +q('championYear').value,
+
+        player:
+          q('championPlayer').value
+
+      }
+    );
+
+
+  if(saved){
+
+    event.target.reset();
+
+    q('championId').value =
+      '';
+
+  }
+
+};
+
+
+/* ======================================================
+   NEWS
+====================================================== */
+
+q('newsForm').onsubmit =
+async event => {
+
+  event.preventDefault();
+
+
+  const id =
+    q('newsId').value;
+
+
+  const old =
+    id
+      ? cache.news.find(
+          x => x.id == id
+        )
+      : null;
+
+
+  let photo_url =
+    old?.photo_url ||
+    null;
+
+
+  const file =
+    q('newsPhoto')
+      .files[0];
+
+
+  if(file){
+
+    const safeName =
+      file.name.replace(
+        /[^a-zA-Z0-9._-]/g,
+        '-'
+      );
+
+
+    const path =
+      `${Date.now()}-${safeName}`;
+
+
+    const upload =
+      await sb
+        .storage
+        .from('news-photos')
+        .upload(
+          path,
+          file
+        );
+
+
+    if(upload.error){
+
+      alert(
+        upload.error.message
+      );
+
+      return;
 
     }
 
-    q('resultForm').onsubmit =
-      async event => {
 
-        event.preventDefault();
+    photo_url =
+      sb
+        .storage
+        .from('news-photos')
+        .getPublicUrl(path)
+        .data
+        .publicUrl;
 
-        const saved =
-          await save(
-            'results',
-            q('resultId').value,
-            {
-              player:
-                q('resultPlayer').value,
+  }
 
-              wins:
-                +q('resultWins').value,
 
-              draws:
-                +q('resultDraws').value
+  const saved =
+    await save(
+      'news',
+      id,
+      {
+
+        date:
+          q('newsDate').value,
+
+        captain:
+          q('newsCaptain').value,
+
+        wins:
+          +q('newsWins').value,
+
+        draws:
+          +q('newsDraws').value,
+
+        summary:
+          q('newsSummary').value,
+
+        photo_url
+
+      }
+    );
+
+
+  if(saved){
+
+    event.target.reset();
+
+    q('newsId').value =
+      '';
+
+  }
+
+};
+
+
+/* ======================================================
+   PELADA AO VIVO
+====================================================== */
+
+async function loadLive(){
+
+  const {data:sessions} =
+    await sb
+      .from('live_sessions')
+      .select('*')
+      .eq(
+        'status',
+        'open'
+      )
+      .order(
+        'created_at',
+        {ascending:false}
+      )
+      .limit(1);
+
+
+  live.session =
+    sessions?.[0] ||
+    null;
+
+
+  if(!live.session){
+
+    live.teams = [];
+    live.players = [];
+    live.goals = [];
+
+    renderLive();
+
+    return;
+
+  }
+
+
+  const [
+    teamsResponse,
+    goalsResponse
+  ] =
+  await Promise.all([
+
+    sb
+      .from('live_teams')
+      .select('*')
+      .eq(
+        'session_id',
+        live.session.id
+      )
+      .order('created_at'),
+
+    sb
+      .from('live_goals')
+      .select('*')
+      .eq(
+        'session_id',
+        live.session.id
+      )
+      .order(
+        'goals',
+        {ascending:false}
+      )
+
+  ]);
+
+
+  live.teams =
+    teamsResponse.data ||
+    [];
+
+
+  live.goals =
+    goalsResponse.data ||
+    [];
+
+
+  if(live.teams.length){
+
+    const teamIds =
+      live.teams.map(
+        team =>
+          team.id
+      );
+
+
+    const {data:players} =
+      await sb
+        .from('live_team_players')
+        .select('*')
+        .in(
+          'team_id',
+          teamIds
+        )
+        .order('created_at');
+
+
+    live.players =
+      players ||
+      [];
+
+  }else{
+
+    live.players = [];
+
+  }
+
+
+  renderLive();
+
+}
+
+
+/* ======================================================
+   RENDER PELADA AO VIVO
+====================================================== */
+
+function renderLive(){
+
+  const open =
+    !!live.session;
+
+
+  q('sessionCreator')
+    .style
+    .display =
+      'none';
+
+
+  q('liveControls')
+    .style
+    .display =
+      open
+        ? 'block'
+        : 'none';
+
+
+  q('liveStatusTitle')
+    .textContent =
+      open
+        ? 'Pelada em andamento'
+        : 'Nenhuma pelada aberta';
+
+
+  q('liveStatusMeta')
+    .textContent =
+      open
+        ? `${br(live.session.date)} • status: aberta`
+        : 'Abra uma nova pelada para começar.';
+
+
+  q('newSessionBtn').disabled =
+    open;
+
+
+  if(!open){
+    return;
+  }
+
+
+  /* TIMES */
+
+  q('liveTeams')
+    .innerHTML =
+      live.teams.length
+        ? live.teams.map(
+            team => {
+
+              const players =
+                live.players
+                  .filter(
+                    player =>
+                      player.team_id === team.id
+                  )
+                  .map(
+                    player =>
+                      player.player
+                  )
+                  .join(', ');
+
+
+              return `
+              <div class="team-box">
+
+                <div class="team-head">
+
+                  <div>
+
+                    <strong>
+                      ${team.name}
+                    </strong>
+
+                    <div class="players">
+                      ${
+                        players ||
+                        'Sem jogadores'
+                      }
+                    </div>
+
+                  </div>
+
+
+                  <div class="team-actions">
+
+                    <span class="team-score">
+                      ${team.wins}V
+                    </span>
+
+                    <button
+                      onclick="changeWins('${team.id}',1)"
+                    >
+                      +1
+                    </button>
+
+                    <button
+                      class="secondary"
+                      onclick="changeWins('${team.id}',-1)"
+                    >
+                      −1
+                    </button>
+
+                  </div>
+
+                </div>
+
+              </div>
+              `;
+
             }
-          );
+          ).join('')
+        : `
+          <p class="mini">
+            Nenhum time cadastrado.
+          </p>
+        `;
 
-        if(saved){
 
-          event.target.reset();
+  /* SELECT DOS TIMES */
 
-          q('resultId').value =
-            '';
+  q('goalPlayerTeam')
+    .innerHTML =
+      live.teams.map(
+        team =>
+        `
+        <option value="${team.id}">
+          ${team.name}
+        </option>
+        `
+      ).join('');
 
-        }
 
-      };
+  /* GOLS */
 
-    q('goalForm').onsubmit =
-      async event => {
+  q('liveGoals')
+    .innerHTML =
+      live.goals.length
+        ? live.goals.map(
+            goal => {
 
-        event.preventDefault();
+              const team =
+                live.teams.find(
+                  item =>
+                    item.id === goal.team_id
+                );
 
-        const saved =
-          await save(
-            'goals',
-            q('goalId').value,
-            {
-              player:
-                q('goalPlayer').value,
 
-              goals:
-                +q('goalCount').value
+              return `
+              <div class="goal-line">
+
+                <div>
+
+                  <strong>
+                    ${goal.player}
+                  </strong>
+
+                  <div class="mini">
+                    ${team?.name || ''}
+                  </div>
+
+                </div>
+
+
+                <div class="goal-actions">
+
+                  <span class="goal-score">
+                    ${goal.goals}
+                  </span>
+
+                  <button
+                    onclick="changeGoals('${goal.id}',1)"
+                  >
+                    +1
+                  </button>
+
+                  <button
+                    class="secondary"
+                    onclick="changeGoals('${goal.id}',-1)"
+                  >
+                    −1
+                  </button>
+
+                </div>
+
+              </div>
+              `;
+
             }
-          );
+          ).join('')
+        : `
+          <p class="mini">
+            Nenhum jogador no placar de gols.
+          </p>
+        `;
 
-        if(saved){
 
-          event.target.reset();
+  /* LÍDER DE VITÓRIAS */
 
-          q('goalId').value =
-            '';
+  const maxWins =
+    Math.max(
+      0,
+      ...live.teams.map(
+        team =>
+          team.wins
+      )
+    );
 
-        }
 
-      };
+  const leaders =
+    live.teams.filter(
+      team =>
+        team.wins === maxWins
+    );
 
-    q('financeForm').onsubmit =
-      async event => {
 
-        event.preventDefault();
+  q('championSelect')
+    .innerHTML =
+      leaders.map(
+        team =>
+        `
+        <option value="${team.id}">
+          ${team.name} • ${team.wins}V
+        </option>
+        `
+      ).join('');
 
-        const saved =
-          await save(
-            'finance',
-            q('financeId').value,
-            {
-              date:
-                q('financeDate').value,
 
-              description:
-                q('financeDescription').value,
+  /* ARTILHEIRO */
 
-              type:
-                q('financeType').value,
+  const maxGoals =
+    Math.max(
+      0,
+      ...live.goals.map(
+        goal =>
+          goal.goals
+      )
+    );
 
-              value:
-                +q('financeValue').value
-            }
-          );
 
-        if(saved){
+  const scorers =
+    live.goals.filter(
+      goal =>
+        goal.goals === maxGoals
+    );
 
-          event.target.reset();
 
-          q('financeId').value =
-            '';
+  q('scorerSelect')
+    .innerHTML =
+      scorers.map(
+        goal =>
+        `
+        <option value="${goal.player}">
+          ${goal.player} • ${goal.goals} gols
+        </option>
+        `
+      ).join('');
 
-        }
+}
 
-      };
 
-    q('championForm').onsubmit =
-      async event => {
+/* ======================================================
+   ABRIR PELADA
+====================================================== */
 
-        event.preventDefault();
+q('newSessionBtn').onclick =
+() => {
 
-        const saved =
-          await save(
-            'champions',
-            q('championId').value,
-            {
-              year:
-                +q('championYear').value,
+  q('sessionCreator')
+    .style
+    .display =
+      'block';
 
-              player:
-                q('championPlayer').value
-            }
-          );
 
-        if(saved){
+  q('sessionDate').value =
+    new Date()
+      .toISOString()
+      .slice(
+        0,
+        10
+      );
 
-          event.target.reset();
+};
 
-          q('championId').value =
-            '';
 
-        }
+q('refreshLiveBtn').onclick =
+  loadLive;
 
-      };
 
-    q('newsForm').onsubmit =
-      async event => {
+q('sessionForm').onsubmit =
+async event => {
 
-        event.preventDefault();
+  event.preventDefault();
 
-        const id =
-          q('newsId').value;
 
-        const old =
-          id
-            ? cache.news
-                .find(
-                  value =>
-                    value.id == id
-                )
-            : null;
+  const {error} =
+    await sb
+      .from('live_sessions')
+      .insert({
 
-        let photo_url =
-          old?.photo_url ||
-          null;
+        date:
+          q('sessionDate').value
 
-        const file =
-          q('newsPhoto')
-            .files[0];
+      });
 
-        if(file){
 
-          const safeName =
-            file.name
-              .replace(
-                /[^a-zA-Z0-9._-]/g,
-                '-'
-              );
+  if(error){
 
-          const path =
-            `${Date.now()}-${safeName}`;
+    alert(
+      error.message
+    );
 
-          const uploadResponse =
-            await sb
-              .storage
-              .from('news-photos')
-              .upload(
-                path,
-                file
-              );
+    return;
 
-          if(uploadResponse.error){
+  }
 
-            alert(
-              uploadResponse
-                .error
-                .message
-            );
 
-            return;
+  q('sessionCreator')
+    .style
+    .display =
+      'none';
 
-          }
 
-          photo_url =
-            sb
-              .storage
-              .from('news-photos')
-              .getPublicUrl(path)
-              .data
-              .publicUrl;
+  await loadLive();
 
-        }
+};
 
-        const saved =
-          await save(
-            'news',
-            id,
-            {
-              date:
-                q('newsDate').value,
 
-              captain:
-                q('newsCaptain').value,
+/* ======================================================
+   ADICIONAR TIME
+====================================================== */
 
-              wins:
-                +q('newsWins').value,
+q('teamForm').onsubmit =
+async event => {
 
-              draws:
-                +q('newsDraws').value,
+  event.preventDefault();
 
-              summary:
-                q('newsSummary').value,
 
-              photo_url
-            }
-          );
+  if(!live.session){
+    return;
+  }
 
-        if(saved){
 
-          event.target.reset();
+  const {data,error} =
+    await sb
+      .from('live_teams')
+      .insert({
 
-          q('newsId').value =
-            '';
+        session_id:
+          live.session.id,
 
-        }
+        name:
+          q('teamName')
+            .value
+            .trim()
 
-      };
+      })
+      .select()
+      .single();
 
-    refreshAuth();
-    load();
 
-  </script>
+  if(error){
+
+    alert(
+      error.message
+    );
+
+    return;
+
+  }
+
+
+  const players =
+    q('teamPlayers')
+      .value
+      .split(',')
+      .map(
+        item =>
+          item.trim()
+      )
+      .filter(Boolean);
+
+
+  if(players.length){
+
+    const {error:playersError} =
+      await sb
+        .from('live_team_players')
+        .insert(
+          players.map(
+            player => ({
+
+              team_id:
+                data.id,
+
+              player
+
+            })
+          )
+        );
+
+
+    if(playersError){
+
+      alert(
+        playersError.message
+      );
+
+      return;
+
+    }
+
+  }
+
+
+  event.target.reset();
+
+  await loadLive();
+
+};
+
+
+/* ======================================================
+   ALTERAR VITÓRIAS
+====================================================== */
+
+window.changeWins =
+async (
+  id,
+  delta
+) => {
+
+  const team =
+    live.teams.find(
+      item =>
+        item.id === id
+    );
+
+
+  const wins =
+    Math.max(
+      0,
+      (team?.wins || 0) +
+      delta
+    );
+
+
+  const {error} =
+    await sb
+      .from('live_teams')
+      .update({
+        wins
+      })
+      .eq(
+        'id',
+        id
+      );
+
+
+  if(error){
+
+    alert(
+      error.message
+    );
+
+    return;
+
+  }
+
+
+  await loadLive();
+
+};
+
+
+/* ======================================================
+   ADICIONAR JOGADOR AO PLACAR
+====================================================== */
+
+q('goalPlayerForm').onsubmit =
+async event => {
+
+  event.preventDefault();
+
+
+  if(!live.session){
+    return;
+  }
+
+
+  const player =
+    q('goalPlayerName')
+      .value
+      .trim();
+
+
+  const team_id =
+    q('goalPlayerTeam').value;
+
+
+  const existing =
+    live.goals.find(
+      goal =>
+        goal.player
+          .toLowerCase() ===
+        player
+          .toLowerCase()
+    );
+
+
+  if(existing){
+
+    alert(
+      'Este jogador já está no placar de gols.'
+    );
+
+    return;
+
+  }
+
+
+  const {error} =
+    await sb
+      .from('live_goals')
+      .insert({
+
+        session_id:
+          live.session.id,
+
+        team_id,
+
+        player,
+
+        goals:0
+
+      });
+
+
+  if(error){
+
+    alert(
+      error.message
+    );
+
+    return;
+
+  }
+
+
+  event.target.reset();
+
+  await loadLive();
+
+};
+
+
+/* ======================================================
+   ALTERAR GOLS
+====================================================== */
+
+window.changeGoals =
+async (
+  id,
+  delta
+) => {
+
+  const goal =
+    live.goals.find(
+      item =>
+        item.id === id
+    );
+
+
+  const goals =
+    Math.max(
+      0,
+      (goal?.goals || 0) +
+      delta
+    );
+
+
+  const {error} =
+    await sb
+      .from('live_goals')
+      .update({
+        goals
+      })
+      .eq(
+        'id',
+        id
+      );
+
+
+  if(error){
+
+    alert(
+      error.message
+    );
+
+    return;
+
+  }
+
+
+  await loadLive();
+
+};
+
+
+/* ======================================================
+   ENCERRAR PELADA
+====================================================== */
+
+q('finishSessionBtn').onclick =
+async () => {
+
+  if(!live.session){
+    return;
+  }
+
+
+  if(
+    !q('championSelect').value ||
+    !q('scorerSelect').value
+  ){
+
+    alert(
+      'Cadastre os times e os gols antes de encerrar.'
+    );
+
+    return;
+
+  }
+
+
+  const championText =
+    q('championSelect')
+      .selectedOptions[0]
+      ?.textContent;
+
+
+  const scorerText =
+    q('scorerSelect')
+      .selectedOptions[0]
+      ?.textContent;
+
+
+  const confirmed =
+    confirm(
+      `CONFIRMAR FECHAMENTO?\n\n` +
+      `Campeão: ${championText}\n` +
+      `Artilheiro: ${scorerText}\n\n` +
+      `O ranking oficial será atualizado.`
+    );
+
+
+  if(!confirmed){
+    return;
+  }
+
+
+  q('finishSessionBtn').disabled =
+    true;
+
+
+  q('finishMessage').textContent =
+    'Fechando pelada...';
+
+
+  const {error} =
+    await sb.rpc(
+      'finish_live_session',
+      {
+
+        p_session_id:
+          live.session.id,
+
+        p_champion_team_id:
+          q('championSelect').value,
+
+        p_top_scorer:
+          q('scorerSelect').value
+
+      }
+    );
+
+
+  q('finishSessionBtn').disabled =
+    false;
+
+
+  if(error){
+
+    q('finishMessage').textContent =
+      error.message;
+
+
+    alert(
+      error.message
+    );
+
+
+    return;
+
+  }
+
+
+  q('finishMessage').textContent =
+    'Pelada encerrada com sucesso.';
+
+
+  await loadLive();
+
+  await loadPublic();
+
+
+  alert(
+    'Pelada encerrada! Rankings atualizados.'
+  );
+
+};
+
+
+/* ======================================================
+   INICIALIZAÇÃO
+====================================================== */
+
+refreshAuth();
+
+loadPublic();
+
+</script>
 
 </body>
 </html>
